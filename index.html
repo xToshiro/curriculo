@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jairo Ivo Castro Brito - Currículo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0c1322;
+            color: #e5e7eb;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -31px;
+            top: 5px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: #38bdf8;
+            border: 4px solid #1f2937;
+            z-index: 10;
+        }
+        .timeline-path {
+            position: absolute;
+            left: -23px;
+            top: 22px;
+            width: 2px;
+            height: calc(100% - 10px);
+            background-color: #374151;
+        }
+        .icon-skill {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .icon-skill:hover {
+            transform: scale(1.2);
+            color: #38bdf8;
+        }
+        .project-card {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: #38bdf8;
+            box-shadow: 0 10px 20px -5px rgba(56, 189, 248, 0.15);
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #lang-slider {
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .print-only {
+            display: none;
+        }
+        .print-hide {
+            display: block;
+        }
+
+        /* --- Timeline Animations --- */
+        @keyframes beacon-pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(250, 204, 21, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(250, 204, 21, 0);
+            }
+        }
+
+        #current-status::before {
+            background-color: #facc15; /* Yellow dot */
+            animation: beacon-pulse 2s infinite;
+            animation-play-state: paused;
+        }
+        
+        #timeline-container.is-visible #current-status::before {
+            animation-play-state: running;
+        }
+        /* --- End Timeline Animations --- */
+
+
+        @media print {
+            html, body {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+                font-size: 10pt;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .max-w-4xl {
+                max-width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+                text-align: center;
+                margin-top: 1.5rem;
+                font-size: 0.8rem;
+            }
+            .print-hide {
+                display: none !important;
+            }
+            section {
+                border: none !important;
+                box-shadow: none !important;
+                margin-bottom: 1.5rem !important;
+            }
+            #projects-container {
+                border: 1px solid #e5e7eb !important;
+                padding: 0.75rem !important;
+                display: block !important;
+            }
+            .project-card {
+                border: none !important;
+                padding: 0.25rem 0 !important;
+                box-shadow: none !important;
+            }
+            #contact-details, .timeline-item {
+                border: 1px solid #e5e7eb !important;
+                box-shadow: none !important;
+                page-break-inside: avoid;
+            }
+            .animate-on-scroll {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+            h1, h2, h3, h4, p, a, span {
+                color: #000 !important;
+            }
+            .text-sky-400 { color: #0369a1 !important; }
+            .text-yellow-400 { color: #ca8a04 !important; }
+            .text-emerald-400 { color: #047857 !important; }
+            .bg-gray-900, .bg-gray-700, .project-card {
+                background-color: transparent !important;
+            }
+            .timeline-item::before {
+                background-color: #333 !important;
+                border-color: #ccc !important;
+                animation: none !important; /* Disable pulse on print */
+            }
+            .timeline-path {
+                background-color: #ccc !important;
+            }
+            a {
+                text-decoration: none;
+                color: #0369a1 !important;
+            }
+            .print-no-link-expand a[href]:after {
+                content: "" !important;
+            }
+            a[href]:after {
+                content: " (" attr(href) ")";
+                font-size: 0.8em;
+                color: #555;
+            }
+            a[href^="mailto:"]:after, a[href^="tel:"]:after {
+                content: "";
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900">
+
+    <div class="max-w-4xl mx-auto p-4 sm:p-8">
+
+        <header class="flex flex-col sm:flex-row justify-between items-center mb-8 animate-on-scroll">
+            <div class="text-center sm:text-left">
+                <h1 class="text-4xl font-extrabold text-white">Jairo Ivo Castro Brito</h1>
+                <p class="text-xl text-sky-400 font-medium" data-lang-key="title">Doutorando em Engenharia de Transportes | Desenvolvedor & Pesquisador</p>
+            </div>
+        </header>
+
+        <section id="contact-details" class="flex flex-wrap justify-center sm:justify-start gap-x-6 gap-y-2 mb-12 text-gray-400 border-b border-t border-gray-700 py-4 animate-on-scroll print-no-link-expand" style="transition-delay: 100ms;">
+            <a href="mailto:jairoivo@hotmail.com" class="hover:text-sky-400 transition-colors duration-300 flex items-center">
+                <i class="fas fa-envelope mr-2"></i>jairoivo@hotmail.com
+            </a>
+            <a href="tel:+5585987684513" class="hover:text-sky-400 transition-colors duration-300 flex items-center">
+                <i class="fas fa-phone mr-2"></i>+55 85 9 8768-4513
+            </a>
+            <!-- <a href="https://www.linkedin.com/in/jairo-ivo-brito/" target="_blank" class="hover:text-sky-400 transition-colors duration-300 flex items-center">
+                <i class="fab fa-linkedin mr-2"></i>linkedin.com/in/jairo-ivo-brito
+            </a> -->
+            <a href="https://github.com/xToshiro/" target="_blank" class="hover:text-sky-400 transition-colors duration-300 flex items-center">
+                <i class="fab fa-github mr-2"></i>github.com/xToshiro
+            </a>
+        </section>
+
+        <main>
+            <section id="about" class="mb-16 animate-on-scroll" style="transition-delay: 200ms;">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-3xl font-bold text-white border-b-2 border-sky-400 pb-2" data-lang-key="about_title">Sobre Mim</h2>
+                    <div class="flex items-center space-x-4 no-print">
+                         <div id="lang-switch" class="relative flex items-center w-24 bg-gray-700 rounded-full p-1 cursor-pointer">
+                            <div id="lang-slider" class="absolute bg-sky-500 h-7 w-1/2 rounded-full"></div>
+                            <span class="lang-option w-1/2 text-center z-10 py-1 text-sm font-semibold text-white" data-lang="pt">PT</span>
+                            <span class="lang-option w-1/2 text-center z-10 py-1 text-sm font-semibold text-white" data-lang="en">EN</span>
+                        </div>
+                        <button id="print-btn" class="flex items-center space-x-2 bg-gray-700 hover:bg-sky-500 text-white font-semibold py-1.5 px-4 rounded-full transition-colors duration-300">
+                            <i class="fas fa-print"></i>
+                            <span data-lang-key="print_button">Imprimir</span>
+                        </button>
+                    </div>
+                </div>
+                <p class="text-lg text-gray-300 leading-relaxed" data-lang-key="about_text">
+                    Doutorando pelo Programa de Pós-Graduação em Engenharia de Transportes da UFC, com mestrado na mesma área e graduação em Engenharia Civil. Pesquisador no laboratório TRAMA (Transporte e Meio Ambiente), vinculado ao Grupo de Pesquisa em Transportes e Meio Ambiente (GTTEMA), com foco em monitoramento ambiental, qualidade do ar e desenvolvimento de hardware/software open-source. Apaixonado por tecnologia, análise de dados e soluções para infraestrutura urbana.
+                </p>
+            </section>
+
+            <section id="experience" class="mb-16">
+                <h2 class="text-3xl font-bold text-white border-b-2 border-sky-400 pb-2 mb-8 animate-on-scroll" data-lang-key="experience_title">Formação & Experiência</h2>
+                <div id="timeline-container" class="relative pl-8">
+                    <div id="current-status" class="timeline-item relative pb-12 animate-on-scroll">
+                        <div class="timeline-path"></div>
+                        <p class="font-semibold text-yellow-400" data-lang-key="phd_period">2025 - Presente</p>
+                        <h3 class="text-xl font-bold text-white" data-lang-key="phd_title">Doutorado em Engenharia de Transportes</h3>
+                        <p class="font-medium text-gray-400 mb-2" data-lang-key="phd_location">Universidade Federal do Ceará (UFC)</p>
+                        <p class="text-gray-300" data-lang-key="phd_desc">Foco de Pesquisa: Análise de Big Data e eventos em tempo real para modelagem e monitoramento da qualidade do ar em centros urbanos.</p>
+                    </div>
+                    <div class="timeline-item relative pb-12 animate-on-scroll">
+                        <div class="timeline-path"></div>
+                        <p class="font-semibold text-sky-400" data-lang-key="master_period">2023 - 2025</p>
+                        <h3 class="text-xl font-bold text-white" data-lang-key="master_title">Mestrado em Engenharia de Transportes</h3>
+                        <p class="font-medium text-gray-400 mb-2" data-lang-key="master_location">Universidade Federal do Ceará (UFC)</p>
+                        <p class="text-gray-300" data-lang-key="master_desc">Dissertação: "Análise da Influência das Emissões Veiculares Sobre as Concentrações de Poluentes Atmosféricos em Vias Urbanas".</p>
+                        <div class="mt-4 pl-4 border-l-2 border-emerald-400">
+                            <h4 class="font-semibold text-emerald-400" data-lang-key="master_proj_title">Projeto Aplicado</h4>
+                            <p class="text-gray-300 text-sm" data-lang-key="master_proj_desc">Desenvolvimento de dispositivo de monitoramento de qualidade do ar (hardware open-source e software) para coleta de dados da pesquisa, utilizado na rede de monitoramento de Fortaleza. Atualmente em processo de patente. <a href="https://diariodonordeste.verdesmares.com.br/ceara/fortaleza-tera-25-monitores-de-qualidade-do-ar-a-partir-de-abril-1.3204285" target="_blank" class="text-sky-400 hover:underline" data-lang-key="master_proj_link">Referência.</a></p>
+                        </div>
+                    </div>
+                    <div class="timeline-item relative pb-12 animate-on-scroll">
+                        <div class="timeline-path"></div>
+                        <p class="font-semibold text-sky-400" data-lang-key="bachelor_period">2017 - 2022</p>
+                        <h3 class="text-xl font-bold text-white" data-lang-key="bachelor_title">Graduação em Engenharia Civil</h3>
+                        <p class="font-medium text-gray-400 mb-2" data-lang-key="bachelor_location">Centro Universitário Fametro (Unifametro)</p>
+                        <div class="mt-4 pl-4 border-l-2 border-emerald-400 space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-emerald-400" data-lang-key="internship_title">Estágio em Automação (2021)</h4>
+                                <p class="text-gray-300 text-sm" data-lang-key="internship_desc">Nutec: Desenvolvimento de dispositivos de automação no Laboratório de Resíduos Sólidos e Efluentes (Larse).</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-emerald-400" data-lang-key="extra_course_title">Curso Complementar</h4>
+                                <p class="text-gray-300 text-sm" data-lang-key="extra_course_desc">Excel Avançado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="skills" class="mb-16">
+                <h2 class="text-3xl font-bold text-white border-b-2 border-sky-400 pb-2 mb-8 animate-on-scroll" data-lang-key="skills_title">Habilidades Técnicas</h2>
+                <div class="grid md:grid-cols-2 gap-x-8 gap-y-6 animate-on-scroll">
+                    <div class="flex items-start">
+                        <i class="fas fa-microchip text-emerald-400 text-2xl mt-1"></i>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-white" data-lang-key="skill_group_iot_title">Embarcados & IoT</h4>
+                            <p class="text-gray-400 text-sm" data-lang-key="skill_group_iot_desc">C/C++ e MicroPython para desenvolvimento de dispositivos (Arduino, ESP32) e automação.</p>
+                        </div>
+                    </div>
+                     <div class="flex items-start">
+                        <i class="fab fa-python text-emerald-400 text-2xl mt-1"></i>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-white" data-lang-key="skill_group_data_title">Análise de Dados & Backend</h4>
+                            <p class="text-gray-400 text-sm" data-lang-key="skill_group_data_desc">Python para análise de dados, dashboards (Streamlit), backend (Flask) e automação.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-code text-emerald-400 text-2xl mt-1"></i>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-white" data-lang-key="skill_group_frontend_title">Frontend</h4>
+                            <p class="text-gray-400 text-sm" data-lang-key="skill_group_frontend_desc">HTML, CSS e JavaScript para desenvolvimento de interfaces e dashboards interativos.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-database text-emerald-400 text-2xl mt-1"></i>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-white" data-lang-key="skill_group_db_title">Bancos de Dados</h4>
+                            <p class="text-gray-400 text-sm" data-lang-key="skill_group_db_desc">Experiência com bancos de dados NoSQL (Firebase) e relacionais (SQL).</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-cube text-emerald-400 text-2xl mt-1"></i>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-white" data-lang-key="skill_group_3d_title">Modelagem 3D</h4>
+                            <p class="text-gray-400 text-sm" data-lang-key="skill_group_3d_desc">Criação de modelos para impressão 3D e prototipagem.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects">
+                <h2 class="text-3xl font-bold text-white border-b-2 border-sky-400 pb-2 mb-8 animate-on-scroll" data-lang-key="projects_title">Projetos em Destaque</h2>
+                <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 gap-8 animate-on-scroll">
+                    <div class="project-card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-white" data-lang-key="proj1_title">Air Quality Brazil - Dashboard</h3>
+                        <p class="text-gray-400 mt-2 mb-4 print-hide" data-lang-key="proj1_desc">Plataforma interativa para visualização de dados de qualidade do ar no Brasil, agregando dados de diversas redes de monitoramento.</p>
+                        <a href="https://github.com/xToshiro/air-quality-brazil" target="_blank" class="font-semibold text-sky-400 hover:text-sky-300">Ver no GitHub <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                    </div>
+                    <div class="project-card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-white" data-lang-key="proj2_title">Monitor de Qualidade do Ar</h3>
+                        <p class="text-gray-400 mt-2 mb-4 print-hide" data-lang-key="proj2_desc">Hardware de baixo custo e open-source para monitoramento de poluentes atmosféricos, desenvolvido durante o mestrado.</p>
+                         <p class="text-sm text-gray-500" data-lang-key="proj2_repo_status">Repositório privado (patente em processo).</p>
+                    </div>
+                    <div class="project-card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-white" data-lang-key="proj3_title">GPS Temp View</h3>
+                        <p class="text-gray-400 mt-2 mb-4 print-hide" data-lang-key="proj3_desc">Projeto Arduino para monitoramento de ilhas de calor urbanas com ESP32, coletando dados georreferenciados de temperatura, pressão e umidade.</p>
+                        <a href="https://github.com/xToshiro/gps-temp-view" target="_blank" class="font-semibold text-sky-400 hover:text-sky-300">Ver no GitHub <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                    </div>
+                    <div class="project-card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-white" data-lang-key="proj4_title">PaveVibe</h3>
+                        <p class="text-gray-400 mt-2 mb-4 print-hide" data-lang-key="proj4_desc">Dispositivo georreferenciado para medir e mapear a qualidade do pavimento, identificando defeitos para manutenção e melhoria da infraestrutura.</p>
+                        <a href="https://github.com/xToshiro/pavevibe" target="_blank" class="font-semibold text-sky-400 hover:text-sky-300">Ver no GitHub <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center mt-16 text-gray-500 text-sm animate-on-scroll">
+            <p>&copy; 2024 Jairo Ivo Castro Brito. Todos os direitos reservados.</p>
+            <p class="print-only" data-lang-key="print_footer">
+                Versão online disponível em: <a href="https://xtoshiro.github.io/curriculo/">https://xtoshiro.github.io/curriculo/</a>
+            </p>
+        </footer>
+
+    </div>
+
+    <script>
+        const translations = {
+            pt: {
+                title: "Doutorando em Engenharia de Transportes | Desenvolvedor & Pesquisador",
+                about_title: "Sobre Mim",
+                about_text: "Doutorando pelo Programa de Pós-Graduação em Engenharia de Transportes da UFC, com mestrado na mesma área e graduação em Engenharia Civil. Pesquisador no laboratório TRAMA (Transporte e Meio Ambiente), vinculado ao Grupo de Pesquisa em Transportes e Meio Ambiente (GTTEMA), com foco em monitoramento ambiental, qualidade do ar e desenvolvimento de hardware/software open-source. Apaixonado por tecnologia, análise de dados e soluções para infraestrutura urbana.",
+                experience_title: "Formação & Experiência",
+                phd_period: "2025 - Presente",
+                phd_title: "Doutorado em Engenharia de Transportes",
+                phd_location: "Universidade Federal do Ceará (UFC)",
+                phd_desc: "Foco de Pesquisa: Análise de Big Data e eventos em tempo real para modelagem e monitoramento da qualidade do ar em centros urbanos.",
+                master_period: "2023 - 2025",
+                master_title: "Mestrado em Engenharia de Transportes",
+                master_location: "Universidade Federal do Ceará (UFC)",
+                master_desc: "Dissertação: \"Análise da Influência das Emissões Veiculares Sobre as Concentrações de Poluentes Atmosféricos em Vias Urbanas\".",
+                master_proj_title: "Projeto Aplicado",
+                master_proj_desc: "Desenvolvimento de dispositivo de monitoramento de qualidade do ar (hardware open-source e software) para coleta de dados da pesquisa, utilizado na rede de monitoramento de Fortaleza. Atualmente em processo de patente. <a href='https://diariodonordeste.verdesmares.com.br/ceara/fortaleza-tera-25-monitores-de-qualidade-do-ar-a-partir-de-abril-1.3204285' target='_blank' class='text-sky-400 hover:underline'>Referência.</a>",
+                internship_title: "Estágio em Automação (2021)",
+                internship_desc: "Nutec: Desenvolvimento de dispositivos de automação no Laboratório de Resíduos Sólidos e Efluentes (Larse).",
+                bachelor_period: "2017 - 2022",
+                bachelor_title: "Graduação em Engenharia Civil",
+                bachelor_location: "Centro Universitário Fametro (Unifametro)",
+                extra_course_title: "Curso Complementar",
+                extra_course_desc: "Excel Avançado.",
+                skills_title: "Habilidades Técnicas",
+                skill_group_iot_title: "Embarcados & IoT",
+                skill_group_iot_desc: "C/C++ e MicroPython para desenvolvimento de dispositivos (Arduino, ESP32) e automação.",
+                skill_group_data_title: "Análise de Dados & Backend",
+                skill_group_data_desc: "Python para análise de dados, dashboards (Streamlit), backend (Flask) e automação.",
+                skill_group_frontend_title: "Frontend",
+                skill_group_frontend_desc: "HTML, CSS e JavaScript para desenvolvimento de interfaces e dashboards interativos.",
+                skill_group_db_title: "Bancos de Dados",
+                skill_group_db_desc: "Experiência com bancos de dados NoSQL (Firebase) e relacionais (SQL).",
+                skill_group_3d_title: "Modelagem 3D",
+                skill_group_3d_desc: "Criação de modelos para impressão 3D e prototipagem.",
+                projects_title: "Projetos em Destaque",
+                proj1_title: "Air Quality Brazil - Dashboard",
+                proj1_desc: "Plataforma interativa para visualização de dados de qualidade do ar no Brasil, agregando dados de diversas redes de monitoramento.",
+                proj2_title: "Monitor de Qualidade do Ar",
+                proj2_desc: "Hardware de baixo custo e open-source para monitoramento de poluentes atmosféricos, desenvolvido durante o mestrado.",
+                proj2_repo_status: "Repositório privado (patente em processo).",
+                proj3_title: "GPS Temp View",
+                proj3_desc: "Projeto Arduino para monitoramento de ilhas de calor urbanas com ESP32, coletando dados georreferenciados de temperatura, pressão e umidade.",
+                proj4_title: "PaveVibe",
+                proj4_desc: "Dispositivo georreferenciado para medir e mapear a qualidade do pavimento, identificando defeitos para manutenção e melhoria da infraestrutura.",
+                print_button: "Imprimir",
+                print_footer: "Versão online disponível em: <a href='https://xtoshiro.github.io/curriculo/'>https://xtoshiro.github.io/curriculo/</a>"
+            },
+            en: {
+                title: "PhD Candidate in Transportation Engineering | Developer & Researcher",
+                about_title: "About Me",
+                about_text: "PhD candidate in the Graduate Program in Transportation Engineering at UFC, with a Master's degree in the same field and a Bachelor's in Civil Engineering. I am a researcher at the TRAMA (Transportation and Environment) laboratory, linked to the GTTEMA (Transportation and Environment Research Group), focusing on environmental monitoring, air quality, and developing open-source hardware/software. Passionate about technology, data analysis, and solutions for urban infrastructure.",
+                experience_title: "Education & Experience",
+                phd_period: "2025 - Present",
+                phd_title: "PhD in Transportation Engineering",
+                phd_location: "Federal University of Ceará (UFC)",
+                phd_desc: "Research Focus: Big Data analysis and real-time events for modeling and monitoring air quality in urban centers.",
+                master_period: "2023 - 2025",
+                master_title: "Master's in Transportation Engineering",
+                master_location: "Federal University of Ceará (UFC)",
+                master_desc: "Thesis: \"Analysis of the Influence of Vehicular Emissions on Atmospheric Pollutant Concentrations on Urban Roads\".",
+                master_proj_title: "Applied Project",
+                master_proj_desc: "Development of an air quality monitoring device (open-source hardware and software) to collect research data, used in the Fortaleza monitoring network. Currently patent pending. <a href='https://diariodonordeste.verdesmares.com.br/ceara/fortaleza-tera-25-monitores-de-qualidade-do-ar-a-partir-de-abril-1.3204285' target='_blank' class='text-sky-400 hover:underline'>Reference.</a>",
+                internship_title: "Automation Internship (2021)",
+                internship_desc: "Nutec: Development of automation devices at the Solid Waste and Effluents Laboratory (Larse).",
+                bachelor_period: "2017 - 2022",
+                bachelor_title: "Bachelor's in Civil Engineering",
+                bachelor_location: "Fametro University Center (Unifametro)",
+                extra_course_title: "Complementary Course",
+                extra_course_desc: "Advanced Excel.",
+                skills_title: "Technical Skills",
+                skill_group_iot_title: "Embedded & IoT",
+                skill_group_iot_desc: "C/C++ and MicroPython for device development (Arduino, ESP32) and automation.",
+                skill_group_data_title: "Data Analysis & Backend",
+                skill_group_data_desc: "Python for data analysis, dashboards (Streamlit), backend (Flask), and automation.",
+                skill_group_frontend_title: "Frontend",
+                skill_group_frontend_desc: "HTML, CSS, and JavaScript for developing interfaces and interactive dashboards.",
+                skill_group_db_title: "Databases",
+                skill_group_db_desc: "Experience with NoSQL (Firebase) and relational (SQL) databases.",
+                skill_group_3d_title: "3D Modeling",
+                skill_group_3d_desc: "Creating models for 3D printing and prototyping.",
+                projects_title: "Featured Projects",
+                proj1_title: "Air Quality Brazil - Dashboard",
+                proj1_desc: "Interactive platform for visualizing air quality data in Brazil, aggregating data from various monitoring networks.",
+                proj2_title: "Air Quality Monitor",
+                proj2_desc: "Low-cost, open-source hardware for monitoring atmospheric pollutants, developed during the master's program.",
+                proj2_repo_status: "Private repository (patent pending).",
+                proj3_title: "GPS Temp View",
+                proj3_desc: "Arduino project for urban heat island monitoring with ESP32, collecting georreferenced temperature, pressure, and humidity data.",
+                proj4_title: "PaveVibe",
+                proj4_desc: "A georeferenced device to measure and map pavement quality, identifying defects for maintenance and infrastructure improvement.",
+                print_button: "Print",
+                print_footer: "Online version available at: <a href='https://jairoivo.github.io'>https://jairoivo.github.io</a>"
+            }
+        };
+
+        const langOptions = document.querySelectorAll('.lang-option');
+        const langSlider = document.getElementById('lang-slider');
+        const printBtn = document.getElementById('print-btn');
+
+        function switchLanguage(lang) {
+            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+            
+            const elements = document.querySelectorAll('[data-lang-key]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-lang-key');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            if (lang === 'en') {
+                langSlider.style.transform = 'translateX(100%)';
+            } else {
+                langSlider.style.transform = 'translateX(0%)';
+            }
+        }
+
+        langOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                switchLanguage(e.target.dataset.lang);
+            });
+        });
+        
+        printBtn.addEventListener('click', () => {
+            window.print();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const userLang = navigator.language || navigator.userLanguage;
+            const initialLang = userLang.startsWith('pt') ? 'pt' : 'en';
+            switchLanguage(initialLang);
+
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            const timelineContainer = document.getElementById('timeline-container');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.2
+            });
+
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Separate observer for the timeline container to ensure it animates correctly
+            const timelineObserver = new IntersectionObserver((entries) => {
+                 entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        timelineObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            if(timelineContainer){
+                timelineObserver.observe(timelineContainer);
+            }
+        });
+    </script>
+</body>
+</html>
