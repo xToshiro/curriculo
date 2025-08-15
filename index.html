@@ -277,7 +277,7 @@
                         <p class="text-gray-300" data-lang-key="master_desc">Dissertação: "Análise da Influência das Emissões Veiculares Sobre as Concentrações de Poluentes Atmosféricos em Vias Urbanas".</p>
                         <div class="mt-4 pl-4 border-l-2 border-emerald-400">
                             <h4 class="font-semibold text-emerald-400" data-lang-key="master_proj_title">Projeto Aplicado</h4>
-                            <p class="text-gray-300 text-sm" data-lang-key="master_proj_desc">Desenvolvimento de dispositivo de monitoramento de qualidade do ar (hardware open-source e software) para coleta de dados da pesquisa, utilizado na rede de monitoramento de Fortaleza. Atualmente em processo de patente. <a href="https://www.fortaleza.ce.gov.br/noticias/prefeitura-lanca-politica-e-rede-de-monitoramento-da-qualidade-do-ar-de-fortaleza" target="_blank" class="text-sky-400 hover:underline" data-lang-key="master_proj_link">Referência.</a></p>
+                            <p class="text-gray-300 text-sm" data-lang-key="master_proj_desc">Desenvolvimento de um dispositivo de baixo custo para monitoramento da qualidade do ar, utilizado para implantar uma rede de 25 monitores em Fortaleza. A tecnologia fornece dados em tempo real, cruciais para a gestão ambiental e prevenção de incêndios, e está atualmente em processo de patente. <a href="https://www.fortaleza.ce.gov.br/noticias/prefeitura-lanca-politica-e-rede-de-monitoramento-da-qualidade-do-ar-de-fortaleza" target="_blank" class="text-sky-400 hover:underline">Referência.</a></p>
                         </div>
                     </div>
                     <div class="timeline-item relative pb-12 animate-on-scroll">
@@ -398,12 +398,12 @@
 
     <script>
         const projectsData = [
-            { id: 1, key: 'air-quality-brazil', desc_key: 'proj1_desc', url: 'https://github.com/xToshiro/air-quality-brazil' },
-            { id: 2, key: 'pavevibe', desc_key: 'proj2_desc', url: 'https://github.com/xToshiro/pavevibe' },
-            { id: 3, key: 'gps-temp-view', desc_key: 'proj3_desc', url: 'https://github.com/xToshiro/gps-temp-view' },
-            { id: 4, key: 'firestore-data-backup', desc_key: 'proj4_desc', url: 'https://github.com/xToshiro/firestore-data-backup' },
-            { id: 5, key: 'geocode-tools', desc_key: 'proj5_desc', url: 'https://github.com/xToshiro/geocode-with-google' },
-            { id: 6, key: 'jupyter-on-android', desc_key: 'proj6_desc', url: 'https://github.com/xToshiro/jupyter-on-android' }
+            { id: 1, key: 'air-quality-brazil', desc_key: 'proj1_desc', url: 'https://github.com/xToshiro/air-quality-brazil', tech: ['Python', 'Streamlit', 'Plotly'] },
+            { id: 2, key: 'pavevibe', desc_key: 'proj2_desc', url: 'https://github.com/xToshiro/pavevibe', tech: ['C++', 'ESP32', 'GPS', 'IoT'] },
+            { id: 3, key: 'gps-temp-view', desc_key: 'proj3_desc', url: 'https://github.com/xToshiro/gps-temp-view', tech: ['C++', 'ESP32', 'BME280'] },
+            { id: 4, key: 'firestore-data-backup', desc_key: 'proj4_desc', url: 'https://github.com/xToshiro/firestore-data-backup', tech: ['Python', 'Firebase', 'SQLite'] },
+            { id: 5, key: 'geocode-tools', desc_key: 'proj5_desc', url: 'https://github.com/xToshiro/geocode-with-google', tech: ['Python', 'Selenium'] },
+            { id: 6, key: 'jupyter-on-android', desc_key: 'proj6_desc', url: 'https://github.com/xToshiro/jupyter-on-android', tech: ['Shell', 'Jupyter'] }
         ];
 
         const translations = {
@@ -421,7 +421,7 @@
                 master_location: "Universidade Federal do Ceará (UFC)",
                 master_desc: "Dissertação: \"Análise da Influência das Emissões Veiculares Sobre as Concentrações de Poluentes Atmosféricos em Vias Urbanas\".",
                 master_proj_title: "Projeto Aplicado",
-                master_proj_desc: "Desenvolvimento de dispositivo de monitoramento de qualidade do ar (hardware open-source e software) para coleta de dados da pesquisa, utilizado na rede de monitoramento de Fortaleza. Atualmente em processo de patente. <a href='https://www.fortaleza.ce.gov.br/noticias/prefeitura-lanca-politica-e-rede-de-monitoramento-da-qualidade-do-ar-de-fortaleza' target='_blank' class='text-sky-400 hover:underline'>Referência.</a>",
+                master_proj_desc: "Desenvolvimento de um dispositivo de baixo custo para monitoramento da qualidade do ar, utilizado para implantar uma rede de 25 monitores em Fortaleza. A tecnologia fornece dados em tempo real, cruciais para a gestão ambiental e prevenção de incêndios, e está atualmente em processo de patente. <a href='https://www.fortaleza.ce.gov.br/noticias/prefeitura-lanca-politica-e-rede-de-monitoramento-da-qualidade-do-ar-de-fortaleza' target='_blank' class='text-sky-400 hover:underline'>Referência.</a>",
                 funded_projects_period: "2022 - 2025",
                 funded_projects_title: "Projetos de Pesquisa Financiados",
                 funded_project_1_desc: "Bolsista CNPq no projeto \"Funcionalização de Pavimentos Asfálticos através da Fotocatálise para Mitigação de Poluição Atmosférica\".",
@@ -486,7 +486,7 @@
                 master_location: "Federal University of Ceará (UFC)",
                 master_desc: "Thesis: \"Analysis of the Influence of Vehicular Emissions on Atmospheric Pollutant Concentrations on Urban Roads\".",
                 master_proj_title: "Applied Project",
-                master_proj_desc: "Development of an air quality monitoring device (open-source hardware and software) to collect research data, used in the Fortaleza monitoring network. Currently patent pending. <a href='https://www.fortaleza.ce.gov.br/noticias/prefeitura-lanca-politica-e-rede-de-monitoramento-da-qualidade-do-ar-de-fortaleza' target='_blank' class='text-sky-400 hover:underline'>Reference.</a>",
+                master_proj_desc: "Development of a low-cost air quality monitoring device, used to deploy a network of 25 monitors in Fortaleza. The technology provides real-time data, crucial for environmental management and fire prevention, and is currently patent pending. <a href='https://www.fortaleza.ce.gov.br/noticias/prefeitura-lanca-politica-e-rede-de-monitoramento-da-qualidade-do-ar-de-fortaleza' target='_blank' class='text-sky-400 hover:underline'>Reference.</a>",
                 funded_projects_period: "2022 - 2025",
                 funded_projects_title: "Funded Research Projects",
                 funded_project_1_desc: "CNPq scholarship holder in the project \"Functionalization of Asphalt Pavements through Photocatalysis for Atmospheric Pollution Mitigation\".",
@@ -549,11 +549,15 @@
             const container = document.getElementById('projects-container');
             container.innerHTML = '';
             projectsData.forEach(project => {
+                const techTags = project.tech.map(tag => `<span class="bg-gray-600 text-sky-300 text-xs font-semibold px-2 py-1 rounded-full">${tag}</span>`).join('');
                 const card = `
                     <div class="project-card p-4 rounded-lg flex flex-col">
                         <div class="flex-grow">
                             <h3 class="font-bold text-white">${translations[lang][project.key]}</h3>
                             <p class="text-gray-400 text-sm mt-1">${translations[lang][project.desc_key]}</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            ${techTags}
                         </div>
                         <a href="${project.url}" target="_blank" class="font-semibold text-sky-400 hover:text-sky-300 text-sm mt-3 self-start">
                             Ver no GitHub <i class="fas fa-arrow-right ml-1 text-xs"></i>
