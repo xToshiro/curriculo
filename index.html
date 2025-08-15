@@ -17,6 +17,7 @@
             font-family: 'Inter', sans-serif;
             background-color: #0c1322;
             color: #e5e7eb;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         .timeline-item::before {
             content: '';
@@ -29,6 +30,7 @@
             background-color: #38bdf8;
             border: 4px solid #1f2937;
             z-index: 10;
+            transition: border-color 0.3s ease;
         }
         .timeline-path {
             position: absolute;
@@ -37,6 +39,7 @@
             width: 2px;
             height: calc(100% - 10px);
             background-color: #374151;
+            transition: background-color 0.3s ease;
         }
         .icon-skill {
             transition: transform 0.3s ease, color 0.3s ease;
@@ -48,7 +51,7 @@
         .project-card {
             background-color: #1f2937;
             border: 1px solid #374151;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
         }
         .project-card:hover {
             transform: translateY(-8px);
@@ -95,6 +98,23 @@
             visibility: visible;
             opacity: 1;
         }
+
+        /* --- Light Mode --- */
+        html.light body { background-color: #f9fafb; color: #374151; }
+        html.light .text-white { color: #111827; }
+        html.light .text-sky-400 { color: #0ea5e9; }
+        html.light .text-gray-300 { color: #4b5563; }
+        html.light .text-gray-400 { color: #6b7280; }
+        html.light .text-gray-500 { color: #6b7280; }
+        html.light .border-gray-700 { border-color: #e5e7eb; }
+        html.light .bg-gray-700 { background-color: #e5e7eb; }
+        html.light .bg-gray-700 .text-white { color: #1f2937; }
+        html.light .timeline-item::before { border-color: #ffffff; }
+        html.light .timeline-path { background-color: #e5e7eb; }
+        html.light .project-card { background-color: #ffffff; border-color: #e5e7eb; }
+        html.light #lang-switch { background-color: #e5e7eb; }
+        html.light .tag { background-color: #e5e7eb; color: #3b82f6; }
+
 
         /* --- Timeline Animations --- */
         @keyframes beacon-pulse {
@@ -223,6 +243,9 @@
                 <button id="share-btn" class="flex items-center space-x-2 bg-gray-700 hover:bg-sky-500 text-white font-semibold py-1.5 px-4 rounded-full transition-colors duration-300">
                     <i class="fas fa-share-alt"></i>
                     <span data-lang-key="share_button">Compartilhar</span>
+                </button>
+                <button id="theme-toggle" class="flex items-center justify-center w-10 h-10 bg-gray-700 hover:bg-sky-500 text-white font-semibold rounded-full transition-colors duration-300">
+                    <i id="theme-icon" class="fas fa-moon"></i>
                 </button>
             </div>
         </div>
@@ -544,12 +567,14 @@
         const printBtn = document.getElementById('print-btn');
         const shareBtn = document.getElementById('share-btn');
         const toastMessage = document.getElementById('toast-message');
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
 
         function populateProjects(lang) {
             const container = document.getElementById('projects-container');
             container.innerHTML = '';
             projectsData.forEach(project => {
-                const techTags = project.tech.map(tag => `<span class="bg-gray-600 text-sky-300 text-xs font-semibold px-2 py-1 rounded-full">${tag}</span>`).join('');
+                const techTags = project.tech.map(tag => `<span class="tag bg-gray-600 text-sky-300 text-xs font-semibold px-2 py-1 rounded-full">${tag}</span>`).join('');
                 const card = `
                     <div class="project-card p-4 rounded-lg flex flex-col">
                         <div class="flex-grow">
@@ -625,11 +650,40 @@
                 }, 3000);
             }
         });
+        
+        const themeCheck = () => {
+            const userTheme = localStorage.getItem('theme');
+            const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (userTheme === 'light' || (!userTheme && !systemTheme)) {
+                document.documentElement.classList.add('light');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                document.documentElement.classList.remove('light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            }
+        };
+
+        const themeSwitch = () => {
+            if (document.documentElement.classList.contains('light')) {
+                document.documentElement.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                document.documentElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+        };
+
+        themeToggleBtn.addEventListener('click', () => {
+            themeSwitch();
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
             const userLang = navigator.language || navigator.userLanguage;
             const initialLang = userLang.startsWith('pt') ? 'pt' : 'en';
             switchLanguage(initialLang);
+            themeCheck();
 
             const animatedElements = document.querySelectorAll('.animate-on-scroll');
             const timelineContainer = document.getElementById('timeline-container');
@@ -649,7 +703,6 @@
                 observer.observe(el);
             });
             
-            // Separate observer for the timeline container to ensure it animates correctly
             const timelineObserver = new IntersectionObserver((entries) => {
                  entries.forEach(entry => {
                     if (entry.isIntersecting) {
